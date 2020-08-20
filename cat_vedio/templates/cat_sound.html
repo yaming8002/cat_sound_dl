@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>貓咪聲音判斷</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <!-- <script type="text/javascript" id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflS50iB-/www-widgetapi.js" async=""></script> -->
+
+    <span>{{data}}</span>
+
+
+</head>
+<style>
+    ul {
+        display: block;
+        list-style-type: none;
+        margin: 5px;
+    }
+</style>
+<<body onload="time();">
+
+    <center>
+        <div class="container">
+            <h1 class="display-4">貓咪聲音判斷</h1>
+            <p class="lead">請輸入youtube影片的網址</p>
+            <div>
+                <input class="form-control" id="u2b_url" type="text" value="Click to focus">
+                <input type="button" class="btn btn-primary btn-lg" onclick="catch_u2b()" value="提交">
+
+            </div>
+            <hr class="my-4">
+
+            <div class="row">
+                <div id="vedio_box" class="col-md-8 order-md-1">
+                    <!-- <div id="u2b_vedio" height="100%" width="100%"> -->
+                    <!-- <iframe id="u2b_vedio" height="100%" width="100%" src="" style="pointer-events: none;">
+                    </iframe> -->
+                    <iframe id="u2b_vedio" height="100%" width="100%" src="">
+					</iframe>
+                    <!-- </div> -->
+                </div>
+                <div class="col-md-4 order-md-2 mb-4">
+                    <input id="vedio_btn1" type="button" class="btn btn-primary btn-lg" onclick="play_u2b();" value="播放">
+                    <input id="vedio_btn2" type="button" class="btn btn-primary btn-lg" onclick="pause_u2b();" value="停止">
+                    <p></p>
+                    <p>
+                        影片播放時間：
+                        <div id="vedio_time"></div>
+                    </p>
+                    <p>
+                        聲音判斷：<h3 id="main_show" style="color:blue;" > 無</h3>
+                        <div id="Identify">
+                            <ul>
+                                <li id="none1" align="left"><pre>無 <span id="s_none1"></span></pre></li>
+                                <li id="purring" align="left"><pre>打呼嚕<span id="s_purring"></span></pre></li>
+                                <li id="cat_talk_cats" align="left"><pre>貓咪對話<span id="s_cat_talk_cats"></span></pre></li>
+                                <li id="cat_call_persion" align="left"><pre>叫人<span id="s_cat_call_persion"></span></pre></li>
+                                <li id="caveat" align="left"><pre>警告<span id="s_caveat"></span></li>
+                            </ul>
+                        </div>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <span>{{predict_answer}}</span>
+            </div>
+        </div>
+    </center>
+
+    <script type="text/javascript">
+        // <!-- $("#u2b-clck").onclick(){ -->
+        $("#vedio_box").height($("#vedio_box").width() * 2.2 / 4)
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        var list_sigle = ['無', '打呼嚕', '貓咪對話', '叫人', '警告']
+        var data_list = []
+        var now_time = 0;
+        var player;
+        var button_open = 0;
+        var vedio_url ="";
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('vedio_box', {
+                videoId: vedio_url,
+                autoplay: '0'
+            });
+        }
+		$( "#u2b_url" ).click(function() {
+			$( "#u2b_url" ).attr("value","")
+		});
+
+        function register(vedio_url) {
+            $.ajax({
+                url: 'data',
+                method: 'GET',
+                data: {
+                    'vedio_id': vedio_url
+                },
+                success: function(data, textStatus, xhr) {
+
+                    // console.log(data);
+                    data_list = data.split("__");
+                    // console.log(data_list);
+                    // $("#Identify").append(data_list);
+                },
+                error: function(xhr, status, error) {
+                    // Handle fail scenario here. 
+                }
+            });
+        };
+
+		function check_url(){
+			var url = $("#u2b_url").val();
+			vedio_url = url.match(/^https\:\/\/www\.youtube\.com\/watch\?v\=(\w+)/)[1];
+			console.log(vedio_url)
+			if (vedio_url == ""){
+				alert("請輸入youtube影片的網址");
+			}else{
+				return vedio_url
+			}
+			
+		}
+
+
+        catch_u2b = function() {
+            var url = $("#u2b_url").val();
+			re_url = url.match(/^https\:\/\/www\.youtube\.com\/watch\?v\=(\w+)/);
+			
+			console.log(re_url)
+			if (re_url == null){
+				alert("請輸入正確的影片的網址");
+			}else{
+				vedio_url = re_url[1]
+				player.loadVideoById(vedio_url).stopVideo();
+				register(vedio_url)
+				button_open = 0
+			}
+			
+        };
+
+        play_u2b = function() {
+            player.playVideo();
+
+        };
+
+        pause_u2b = function() {
+            now_time = player.getCurrentTime().toFixed(0);
+            player.pauseVideo();
+        };
+
+
+        function time_clean(now_time) {
+            var hour = Math.floor(now_time / 3600);
+            var min = Math.floor(now_time / 60) % 60;
+            var sec = now_time % 60;
+            if (hour < 10) {
+                t = '0' + hour + ":";
+            } else {
+                t = hour + ":";
+            }
+
+            if (min < 10) {
+                t += "0";
+            }
+            t += min + ":";
+            if (sec < 10) {
+                t += "0";
+            }
+            t += sec;
+
+            return t;
+        }
+
+		function main_show_sound(arr_ans){
+		  var float_arr = new Array(5); 
+		  var savemax = 0.0;
+		  for( i in arr_ans){
+			float_arr[i] = parseFloat(arr_ans[i]);
+			if (savemax < float_arr[i]){
+				savemax = float_arr[i];
+			}
+		  }
+		  if (savemax > 0.2 ){
+			$("#main_show").text(list_sigle[float_arr.indexOf(savemax)])
+		  }else{
+			$("#main_show").text(list_sigle[0])
+		  }
+
+		}
+
+        function set_ans(data_ans, now_time) {
+            if (data_ans != undefined && now_time != 0 ) {
+                arr_ans = data_ans.split(",");
+                // $("#vedio_time").text(arr_ans[0])
+                $("#s_none1").text(arr_ans[0])
+                $("#s_purring").text(arr_ans[1])
+                $("#s_cat_talk_cats").text(arr_ans[2])
+                $("#s_cat_call_persion").text(arr_ans[3])
+                $("#s_caveat").text(arr_ans[4])
+				main_show_sound(arr_ans)
+            }
+        }
+		
+
+        function time() {
+            if (button_open == 0){
+                $("#vedio_btn1").attr("disabled",true );
+                $("#vedio_btn2").attr("disabled",true );
+            }else{
+                $("#vedio_btn1").attr("disabled",false );
+                $("#vedio_btn2").attr("disabled",false );
+            }
+
+            if (vedio_url == "" || data_list == undefined ) {
+                $("#vedio_time").text("00:00:00");
+            } else {
+                button_open = 1
+                now_time = player.getCurrentTime().toFixed(0);
+                $("#vedio_time").text(time_clean(now_time))
+                num = Math.ceil(now_time / 2)
+                if (data_list != undefined)
+                    set_ans(data_list[num],now_time)
+            }
+
+            t = setTimeout(time, 1000);
+        }
+    </script>
+    </body>
+
+</html>
