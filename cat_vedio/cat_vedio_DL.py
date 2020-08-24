@@ -15,7 +15,7 @@ class cat_vedio_DL():
 	MFCC_MAX_LEN =512
 	# os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 	self_path = "/".join(os.path.abspath(__file__).split("\\")[:-1])
-	model = load_model(self_path+'/model20200627_leakyRelu_1.h5')
+	model = load_model(self_path+'/sound_model.h5')
 	wave_path = ""
 
 	def downMp4toW(self, link_id ="jSz2yWYbkdY" ):
