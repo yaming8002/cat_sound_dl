@@ -50,6 +50,7 @@ cat_vedio的內容如下：
 5. 到.\cat_sound\cat_sound\settings.py中的INSTALLED_APPS，加入'cat_vedio'
 
 如下圖
+
 ![](https://i.imgur.com/h9a1DL8.png)
 
 6. 到 .\cat_sound\cat_sound\urls.py修改成以下內容
@@ -90,6 +91,7 @@ python cat_sound\manage.py runserver
 點擊播放，可呈現
 
 ![](https://i.imgur.com/HD9b6ag.png)
+
 判斷貓咪目前的狀態
 
 
@@ -128,6 +130,7 @@ python cat_sound\manage.py runserver
 2. 讀取的資料透過加入雜音，做資料增廣
 3. 進入深度學習：
     * 使用CNN神經網路
+    
 ![](https://i.imgur.com/P2CRB2P.png)
 
     * 優化器： Adam
@@ -140,6 +143,7 @@ python cat_sound\manage.py runserver
 取最高準確率：71%
 
 5. 測試資料混淆矩陣：
+
 ![](https://i.imgur.com/vIF424z.png)
 
 6. 程式碼請參考***cat_sound_dl.ipynb***
