@@ -41,6 +41,7 @@ django-admin startproject cat_sound
 3. 將本範例中的cat_vedio資料夾移入cat_sound中
 
 cat_vedio的內容如下：
+
 ![](https://i.imgur.com/OvyJueX.png)
 
 4. sound_model.zip.001~004解壓縮，放入cat_vedio資料夾內
