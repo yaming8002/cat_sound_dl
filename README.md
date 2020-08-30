@@ -10,15 +10,15 @@
 * [練習model](#practice)  
 
 <a name="use_example"/>
-##使用案例
+#使用案例
 
 作業系統：windows10
 
 程式語言：python3.8
 
 <a name="example_build"/>
-範例建置
----------------------------------------------
+##範例建置
+
 系統是使用Django建置網頁服務
 
 1. 導入API套件
@@ -72,8 +72,8 @@ python cat_sound\manage.py runserver
 ```
 
 <a name="example_show"/>
-範例顯示
----------------------------------------------
+##範例顯示
+
 在啟動django後，使用chrome輸入
 `http://127.0.0.1:8000/cat_vedio/view`
 
@@ -91,15 +91,15 @@ python cat_sound\manage.py runserver
 
 <a name="creat_model"/>
 
-model的建置
-==============================================
+#model的建置
+
 作業系統：windows10
 
 程式語言：python3.8
 
 <a name="prework"/>
-前處理
----------------------------------------------
+##前處理
+
 系統是使用Django建置網頁服務
 
 1. 導入API套件
@@ -153,8 +153,8 @@ python cat_sound\manage.py runserver
 ```
 
 <a name="practice"/>
-練習model
----------------------------------------------
+##練習model
+
 在啟動django後，使用chrome輸入
 `http://127.0.0.1:8000/cat_vedio/view`
 
