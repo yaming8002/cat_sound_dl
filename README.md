@@ -96,15 +96,49 @@ python cat_sound\manage.py runserver
 
 # model的建置
 
-作業系統：windows10
+系統使用：google colab
 
-程式語言：python3.8
+機器學習：使用Tensorflow 2.2
+
+資料來源：youtube影片
+
+資料標籤：依照影片名稱進行分類
 
 <a name="prework"/>
 
 ## 前處理
+1. 將取得的聲音當進行分割，在此專案使用固定長度分割(每兩秒一筆)
+2. 人工判斷去除無效音檔(沒有貓聲音)
+3. 將聲音檔主換為npy(主要是降低資料讀取的負擔)
+    * x_train_o.npy(1800)
+    * y_train_o.npy(1800)
+    * x_verification_o.npy(200)
+    * y_verification_o.npy(200)
+    * x_test_o.npy(100)
+    * y_test_o.npy(100)
+    * to_niose_data.npy(雜音，做混音處理)
+5. 程式碼請參考***prework.ipynb***
 
 
 <a name="practice"/>
 
 ## 練習model
+1. 讀取train和verification的資料
+2. 讀取的資料透過加入雜音，做資料增廣
+3. 進入深度學習：
+    * 使用CNN神經網路
+![](https://i.imgur.com/P2CRB2P.png)
+
+    * 優化器： Adam
+    * 損失函數: categorical_crossentropy
+    
+4. 練習結果：
+
+![](https://i.imgur.com/P0Amr58.png)
+
+取最高準確率：71%
+
+5. 測試資料混淆矩陣：
+![](https://i.imgur.com/vIF424z.png)
+
+6. 程式碼請參考***cat_sound_dl.ipynb***
