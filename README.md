@@ -40,18 +40,18 @@ django-admin startproject cat_sound
 
 3. 將本範例中的cat_vedio資料夾移入cat_sound中
 
-cat_vedio的內容如下：
+cat_sound的內容如下：
 
-![](https://i.imgur.com/OvyJueX.png)
+![](./forReadMe/cat_sound.png)
 
 4. sound_model.zip.001~004解壓縮，放入cat_vedio資料夾內
-![](https://i.imgur.com/2NarLZq.png)
+![](./forReadMe/cat_vedio.png)
 
 5. 到.\cat_sound\cat_sound\settings.py中的INSTALLED_APPS，加入'cat_vedio'
 
 如下圖
 
-![](https://i.imgur.com/h9a1DL8.png)
+![](./forReadMe/settings.png)
 
 6. 到 .\cat_sound\cat_sound\urls.py修改成以下內容
 ```
@@ -83,14 +83,14 @@ python cat_sound\manage.py runserver
 `http://127.0.0.1:8000/cat_vedio/view`
 
 網頁顯示如下：
-![](https://i.imgur.com/3A5zXaf.png)
+![](./forReadMe/show_web.png)
 
 輸入貓咪影片的網址，例如
 `https://www.youtube.com/watch?v=DXUAyRRkI6k`
 
 點擊播放，可呈現
 
-![](https://i.imgur.com/HD9b6ag.png)
+![](./forReadMe/show_vedio.png)
 
 判斷貓咪目前的狀態
 
@@ -138,12 +138,12 @@ python cat_sound\manage.py runserver
     
 4. 練習結果：
 
-![](https://i.imgur.com/P0Amr58.png)
+![](./forReadMe/model.png)
 
 取最高準確率：71%
 
 5. 測試資料混淆矩陣：
 
-![](https://i.imgur.com/vIF424z.png)
+![](./forReadMe/Confusion.png)
 
 6. 程式碼請參考***cat_sound_dl.ipynb***
