@@ -10,6 +10,7 @@
 * [練習model](#practice)  
 
 <a name="use_example"/>
+
 # 使用案例
 
 作業系統：windows10
@@ -17,6 +18,7 @@
 程式語言：python3.8
 
 <a name="example_build"/>
+
 ## 範例建置
 
 系統是使用Django建置網頁服務
@@ -72,6 +74,7 @@ python cat_sound\manage.py runserver
 ```
 
 <a name="example_show"/>
+
 ## 範例顯示
 
 在啟動django後，使用chrome輸入
@@ -98,9 +101,10 @@ python cat_sound\manage.py runserver
 程式語言：python3.8
 
 <a name="prework"/>
+
 ## 前處理
 
 
-
 <a name="practice"/>
+
 ## 練習model
